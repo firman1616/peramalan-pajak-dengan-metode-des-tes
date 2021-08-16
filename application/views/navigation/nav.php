@@ -51,14 +51,23 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="<?php echo base_url('admin/Pendapatan') ?>">Tambah Pendapatan</a>
           </div>
-          <div class="bg-white py-2 collapse-inner rounded">
+          <!-- <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="<?= base_url('admin/Pendapatan/sumber_hidup') ?>">RM Sumber Hidup</a>
-          </div>
+          </div> -->
           <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="<?= base_url('admin/Sumber_hidup') ?>">RM Sumber Hidup</a>
+          </div>
+          <!-- <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="<?= site_url('admin/Pendapatan/brewok') ?>">RM Ayam Brewok</a>
-          </div>
+          </div> -->
           <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="<?= base_url('admin/Ayam_brewok') ?>">RM Ayam Brewok</a>
+          </div>
+          <!-- <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="<?= site_url('admin/Pendapatan/amanis') ?>">RM Amanish</a>
+          </div> -->
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="<?= base_url('admin/Amanis') ?>">RM Amanis</a>
           </div>
         </div>
       </li>
