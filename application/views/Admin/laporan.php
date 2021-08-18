@@ -1,7 +1,3 @@
-<?php
-foreach ($brown as $target_b) {
-    $ramal = $target_b->step5;
-} ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -55,6 +51,7 @@ foreach ($brown as $target_b) {
                     <tbody>
                         <?php
                         $x = 1;
+                        $no = 1;
                         foreach ($brown as $b) { ?>
 
                             <tr>
@@ -69,9 +66,9 @@ foreach ($brown as $target_b) {
                                 <td><?= number_format($b->step5) ?></td>
                                 <td><?= number_format($b->rmse) ?></td>
                                 <td>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#shb"><i class="fa fa-list"></i></button>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#abb"><i class="fa fa-list"></i></button>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#amb"><i class="fa fa-list"></i></button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#shb<?= $no++; ?>"><i class="fa fa-list"></i></button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#abb<?= $no++; ?>"><i class="fa fa-list"></i></button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#amb<?= $no++; ?>"><i class="fa fa-list"></i></button>
                                 </td>
                             </tr>
 
@@ -130,65 +127,73 @@ foreach ($brown as $target_b) {
 <!-- /.container-fluid -->
 
 <!-- WP 1 Brown -->
-<div class="modal fade" id="shb" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Sumber Hidup</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <h5>Target <?= number_format($ramal * 0.4) ?></h5>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End WP 1 Brown -->
-<!-- WP 2 Brown -->
-<div class="modal fade" id="abb" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ayam Brewok</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <h5>Target <?= number_format($ramal * 0.3) ?></h5>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+<?php
+$y = 1;
+foreach ($brown as $target_b) {
+    $ramal = $target_b->step5;
+?>
+    <div class="modal fade" id="shb<?= $y++; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Sumber Hidup</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5>Target <?= number_format($ramal * 0.4) ?></h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- End WP 2 Brown -->
-<!-- WP 2 Brown -->
-<div class="modal fade" id="amb" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Amanis</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <h5>Target <?= number_format($ramal * 0.3) ?></h5>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+    <!-- End WP 1 Brown -->
+    <!-- WP 2 Brown -->
+    <div class="modal fade" id="abb<?= $y++; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ayam Brewok</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5>Target <?= number_format($ramal * 0.3) ?></h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- End WP 2 Brown -->
+    <!-- End WP 2 Brown -->
+    <!-- WP 2 Brown -->
+    <div class="modal fade" id="amb<?= $y++; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Amanis</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5>Target <?= number_format($ramal * 0.3) ?></h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End WP 2 Brown -->
+
+<?php $no++;
+} ?>

@@ -6,12 +6,7 @@ class Peramalan_winter extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-
-		// load Session Library
 		$this->load->library('session');
-
-		// load url helper
-		// $this->load->helper('url');
 	}
 
 	public function index()
