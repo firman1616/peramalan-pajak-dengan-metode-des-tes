@@ -172,8 +172,14 @@
 <!-- WP 1 Brown -->
 <?php
 $y = 1;
-foreach ($brown as $target_b) {
+//die(print_r($fbrown));
+foreach ($fbrown->result() as $target_b) {
     $ramal = $target_b->step5;
+    $target = $ramal * 0.4;
+    $tgl = $target_b->tgl_peramalan;
+    $bln = date('n', strtotime($tgl));
+    $thn = date('Y', strtotime($tgl));
+
 ?>
     <div class="modal fade" id="shb<?= $y++; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -185,7 +191,30 @@ foreach ($brown as $target_b) {
                     </button>
                 </div>
                 <div class="modal-body">
-                    <h5>Target <?= number_format($ramal * 0.4) ?></h5>
+                    <h5>Target <?= 'Rp' . number_format($target); ?></h5>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Tanggal</th>
+                                <th scope="col">Nominal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $len_of_day = cal_days_in_month(CAL_GREGORIAN, $bln, $thn);
+
+                            for ($i = 1; $i <= $len_of_day; $i++) { ?>
+                                <tr>
+                                    <th scope="row"><?php echo $i; ?></th>
+                                    <td><?php echo date('d-M-Y', strtotime($i . '-' . $bln . '-' . $thn)); ?></td>
+                                    <td><?php echo 'Rp' . number_format($target / $len_of_day, 0, '.', ','); ?></td>
+                                </tr>
+                            <?php }
+                            ?>
+
+                        </tbody>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
