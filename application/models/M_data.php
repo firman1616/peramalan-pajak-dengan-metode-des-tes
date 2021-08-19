@@ -62,4 +62,14 @@ class M_data extends CI_model
 	{
 		return $this->db->query("SELECT * FROM tbl_usaha")->num_rows();
 	}
+
+	public function filter_brown($bulan, $year)
+	{
+		return $this->db->query("SELECT * FROM `tbl_peramalan` WHERE MONTH(tgl_peramalan) = '$bulan' AND YEAR(tgl_peramalan) = '$year'");
+	}
+
+	public function filter_winter($bulan, $year)
+	{
+		return $this->db->query("SELECT * FROM `tbl_peramalan_winter` WHERE MONTH(tgl_peramalan_winter) = '$bulan' AND YEAR(tgl_peramalan_winter) = '$year'");
+	}
 }

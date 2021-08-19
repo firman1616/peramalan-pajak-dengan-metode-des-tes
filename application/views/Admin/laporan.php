@@ -7,31 +7,63 @@
                 <h6 class="m-0 font-weight-bold text-primary">Laporan Peramalan</h6>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-2 col-sm-6 col-xs-6">
-                        <select name="bln" id="bln" class="form-control">
-                            <option>Pilih Bulan</option>
+                <form action="" method="POST">
+                    <div class="row">
+                        <div class="col-md-2 col-sm-6 col-xs-6">
+                            <select name="bulan" id="bulan" class="form-control" required>
+                                <option>Pilih Bulan</option>
+                                <option value="1">Januari</option>
+                                <option value="2">Febuari</option>
+                                <option value="3">Maret</option>
+                                <option value="4">April</option>
+                                <option value="5">Mei</option>
+                                <option value="6">Juni</option>
+                                <option value="7">Juli</option>
+                                <option value="8">Agustus</option>
+                                <option value="9">September</option>
+                                <option value="10">Oktober</option>
+                                <option value="11">November</option>
+                                <option value="12">Desember</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-2 col-sm-6 col-xs-6">
                             <?php
-                            $bulan = $this->db->query("SELECT DISTINCT MONTH( tgl_peramalan ) AS Bulan FROM tbl_peramalan")->result();
-                            foreach ($bulan as $bln) {
+                            $now = date('Y');
+                            $ymin = $now - 6;
+                            echo "<select name='tahun' class=form-control required id='tahun'>";
+                            echo "<option value=''>Pilih Tahun</option>";
+                            for ($a = $now; $a >= $ymin; --$a) {
+                                echo "<option value='$a'>$a</option>";
+                            }
+                            echo "</select>";
                             ?>
-                                <option value="<?= $bln->Bulan ?>"><?= date("F", strtotime('0' . $bln->Bulan)) ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
+                        </div>
 
-                    <div class="col-md-2 col-sm-6 col-xs-6">
-                        <select name="thn" id="thn" class="form-control">
-                            <option value="">Pilih Tahun</option>
-                            <option value="01">Bla bLa</option>
-                        </select>
+                        <button class="btn btn-primary" type="submit" name="cari" id="cari"><i class="fa fa-search"></i> Lihat Hasil</button>
                     </div>
-
-                    <button class="btn btn-primary"><i class="fa fa-search"></i> Lihat Hasil</button>
-                </div>
+                </form>
                 <br><br>
+                <?php
+                // error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+                // if (isset($_POST["cari"])) {
+                //     //iki gwe opo?
+                //     $bulan = $_POST["bulan"];
+                //     $year = $_POST["tahun"];
+                // }
+                ?>
+            </div>
+        </div>
+    </div>
 
-                <h2>Hasil Peramalan Brown</h2>
+    <br>
+
+    <div class="row" id="b">
+        <div class="card shadow mb-4 col-md-12">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Hasil peramalan Brown</h6>
+            </div>
+            <div class="card-body">
                 <table class="table table-bordered" width="100%" cellspacing="0">
                     <thead>
                         <tr>
@@ -52,7 +84,9 @@
                         <?php
                         $x = 1;
                         $no = 1;
-                        foreach ($brown as $b) { ?>
+                        // $qbrown = $this->db->query("SELECT * FROM `tbl_peramalan` WHERE MONTH(tgl_peramalan) = '$bulan' AND YEAR(tgl_peramalan) = '$year'");
+
+                        foreach ($fbrown->result() as $b) { ?>
 
                             <tr>
                                 <td><?= $x++; ?></td>
@@ -75,9 +109,18 @@
                         <?php } ?>
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
 
-                <!-- Holt-Winter -->
-                <h2>Hasil Peramalan Holt-Winnter </h2>
+    <br>
+
+    <div class="row" id="w">
+        <div class="card shadow mb-4 col-md-12">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Hasil Peramalan Winter</h6>
+            </div>
+            <div class="card-body">
                 <table class="table table-bordered" width="100%" cellspacing="0">
                     <thead>
                         <tr>
@@ -97,17 +140,17 @@
                     <tbody>
                         <?php
                         $x = 1;
-                        foreach ($winter as $w) { ?>
+                        foreach ($fwinter->result() as $w) { ?>
 
                             <tr>
                                 <td><?= $x++; ?></td>
                                 <td><?= date("Y/m", strtotime($w->tgl_peramalan_winter)) ?></td>
                                 <td><?= number_format($w->data_aktual_winter) ?></td>
                                 <td><?= $w->alpha_winter . ',' . $w->beta . ',' . $w->gamma ?></td>
-                                <td><?= number_format($w->st_winter, 3) ?></td>
-                                <td><?= number_format($w->bt_winter, 3) ?></td>
+                                <td><?= number_format($w->st_winter) ?></td>
+                                <td><?= number_format($w->bt_winter) ?></td>
                                 <td><?= number_format($w->lt_winter, 3) ?></td>
-                                <td><?= number_format($w->ftm_winter, 3) ?></td>
+                                <td><?= number_format($w->ftm_winter) ?></td>
                                 <td><?= number_format($w->rmse_winter) ?></td>
                                 <td>
                                     <button type="button" class="btn btn-primary"><i class="fa fa-list"></i></button>
@@ -118,9 +161,9 @@
                         <?php }  ?>
                     </tbody>
                 </table>
-
             </div>
         </div>
+
     </div>
 
 </div>

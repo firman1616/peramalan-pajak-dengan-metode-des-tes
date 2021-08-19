@@ -56,6 +56,7 @@
 <script type="text/javascript">
   function get_lap() {
     var thn = document.getElementById('thn').value;
+    var bln = document.getElementById('bln').value;
     $.ajax({
       type: "POST",
       data: ({
