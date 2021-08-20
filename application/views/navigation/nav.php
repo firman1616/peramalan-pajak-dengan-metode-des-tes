@@ -104,12 +104,12 @@
           <span>Laporan</span>
         </a>
         <div id="collapseLap" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
+          <!-- <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="<?php echo base_url('admin/Lap_Peramalan/') ?>">peramalan</a>
-          </div>
+          </div> -->
 
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="<?php echo base_url('admin/Laporan/') ?>">Peramalan 2</a>
+            <a class="collapse-item" href="<?php echo base_url('admin/Laporan/') ?>">Peramalan</a>
           </div>
         </div>
       </li>
