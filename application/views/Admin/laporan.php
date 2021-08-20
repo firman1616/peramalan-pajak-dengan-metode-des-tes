@@ -140,6 +140,7 @@
                     <tbody>
                         <?php
                         $x = 1;
+                        $l = 1;
                         foreach ($fwinter->result() as $w) { ?>
 
                             <tr>
@@ -153,9 +154,9 @@
                                 <td><?= number_format($w->ftm_winter) ?></td>
                                 <td><?= number_format($w->rmse_winter) ?></td>
                                 <td>
-                                    <button type="button" class="btn btn-primary"><i class="fa fa-list"></i></button>
-                                    <button type="button" class="btn btn-primary"><i class="fa fa-list"></i></button>
-                                    <button type="button" class="btn btn-primary"><i class="fa fa-list"></i></button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#shw<?= $l++ ?>"><i class="fa fa-list"></i></button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#abw<?= $l++ ?>"><i class="fa fa-list"></i></button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#amw<?= $l++ ?>"><i class="fa fa-list"></i></button>
                                 </td>
                             </tr>
                         <?php }  ?>
@@ -176,6 +177,7 @@ $y = 1;
 foreach ($fbrown->result() as $target_b) {
     $ramal = $target_b->step5;
     $target = $ramal * 0.4;
+    $target2 = $ramal * 0.3;
     $tgl = $target_b->tgl_peramalan;
     $bln = date('n', strtotime($tgl));
     $thn = date('Y', strtotime($tgl));
@@ -191,7 +193,7 @@ foreach ($fbrown->result() as $target_b) {
                     </button>
                 </div>
                 <div class="modal-body">
-                    <h5>Target <?= 'Rp' . number_format($target); ?></h5>
+                    <h5>Target <?= 'Rp. ' . number_format($target); ?></h5>
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -208,7 +210,7 @@ foreach ($fbrown->result() as $target_b) {
                                 <tr>
                                     <th scope="row"><?php echo $i; ?></th>
                                     <td><?php echo date('d-M-Y', strtotime($i . '-' . $bln . '-' . $thn)); ?></td>
-                                    <td><?php echo 'Rp' . number_format($target / $len_of_day, 0, '.', ','); ?></td>
+                                    <td><?php echo 'Rp. ' . number_format($target / $len_of_day, 0, '.', ','); ?></td>
                                 </tr>
                             <?php }
                             ?>
@@ -218,7 +220,6 @@ foreach ($fbrown->result() as $target_b) {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
@@ -235,17 +236,40 @@ foreach ($fbrown->result() as $target_b) {
                     </button>
                 </div>
                 <div class="modal-body">
-                    <h5>Target <?= number_format($ramal * 0.3) ?></h5>
+                    <h5>Target Rp. <?= number_format($target2) ?></h5>
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Tanggal</th>
+                                <th scope="col">Nominal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $len_of_day = cal_days_in_month(CAL_GREGORIAN, $bln, $thn);
+
+                            for ($i = 1; $i <= $len_of_day; $i++) { ?>
+                                <tr>
+                                    <th scope="row"><?php echo $i; ?></th>
+                                    <td><?php echo date('d-M-Y', strtotime($i . '-' . $bln . '-' . $thn)); ?></td>
+                                    <td><?php echo 'Rp. ' . number_format($target2 / $len_of_day, 0, '.', ','); ?></td>
+                                </tr>
+                            <?php }
+                            ?>
+
+                        </tbody>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
     </div>
     <!-- End WP 2 Brown -->
-    <!-- WP 2 Brown -->
+    <!-- WP 3 Brown -->
     <div class="modal fade" id="amb<?= $y++; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -256,16 +280,184 @@ foreach ($fbrown->result() as $target_b) {
                     </button>
                 </div>
                 <div class="modal-body">
-                    <h5>Target <?= number_format($ramal * 0.3) ?></h5>
+                    <h5>Target Rp. <?= number_format($target2) ?></h5>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Tanggal</th>
+                                <th scope="col">Nominal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $len_of_day = cal_days_in_month(CAL_GREGORIAN, $bln, $thn);
+
+                            for ($i = 1; $i <= $len_of_day; $i++) { ?>
+                                <tr>
+                                    <th scope="row"><?php echo $i; ?></th>
+                                    <td><?php echo date('d-M-Y', strtotime($i . '-' . $bln . '-' . $thn)); ?></td>
+                                    <td><?php echo 'Rp. ' . number_format($target2 / $len_of_day, 0, '.', ','); ?></td>
+                                </tr>
+                            <?php }
+                            ?>
+
+                        </tbody>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- End WP 2 Brown -->
+    <!-- End WP 3 Brown -->
 
 <?php $no++;
+} ?>
+
+<?php
+$z = 1;
+foreach ($fwinter->result() as $row) {
+    $a = $row->ftm_winter;
+    $b = $a * 0.4;
+    $c = $a * 0.3;
+    $tgl = $row->tgl_peramalan_winter;
+    $bln = date('n', strtotime($tgl));
+    $thn = date('Y', strtotime($tgl)); ?>
+
+    <!-- WP 1 Winter -->
+    <div class="modal fade" id="shw<?= $z++; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Sumber Hidup</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5>Targer Rp. <?= number_format($b) ?></h5>
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Tanggal</th>
+                                <th scope="col">Nominal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $len_of_day = cal_days_in_month(CAL_GREGORIAN, $bln, $thn);
+
+                            for ($i = 1; $i <= $len_of_day; $i++) { ?>
+                                <tr>
+                                    <th scope="row"><?php echo $i; ?></th>
+                                    <td><?php echo date('d-M-Y', strtotime($i . '-' . $bln . '-' . $thn)); ?></td>
+                                    <td><?php echo 'Rp. ' . number_format($b / $len_of_day, 0, '.', ','); ?></td>
+                                </tr>
+                            <?php }
+                            ?>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End WP 1 Winter -->
+
+    <!-- WP 2 Winter -->
+    <div class="modal fade" id="abw<?= $z++; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ayam Brewok</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5>Target Rp. <?= number_format($c) ?></h5>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Tanggal</th>
+                                <th scope="col">Nominal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $len_of_day = cal_days_in_month(CAL_GREGORIAN, $bln, $thn);
+
+                            for ($i = 1; $i <= $len_of_day; $i++) { ?>
+                                <tr>
+                                    <th scope="row"><?php echo $i; ?></th>
+                                    <td><?php echo date('d-M-Y', strtotime($i . '-' . $bln . '-' . $thn)); ?></td>
+                                    <td><?php echo 'Rp. ' . number_format($c / $len_of_day, 0, '.', ','); ?></td>
+                                </tr>
+                            <?php }
+                            ?>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End WP 2 Winter -->
+
+    <!-- WP 3 Winter -->
+    <div class="modal fade" id="amw<?= $z++; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Amanis</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5>Target Rp. <?= number_format($c) ?></h5>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Tanggal</th>
+                                <th scope="col">Nominal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $len_of_day = cal_days_in_month(CAL_GREGORIAN, $bln, $thn);
+
+                            for ($i = 1; $i <= $len_of_day; $i++) { ?>
+                                <tr>
+                                    <th scope="row"><?php echo $i; ?></th>
+                                    <td><?php echo date('d-M-Y', strtotime($i . '-' . $bln . '-' . $thn)); ?></td>
+                                    <td><?php echo 'Rp. ' . number_format($c / $len_of_day, 0, '.', ','); ?></td>
+                                </tr>
+                            <?php }
+                            ?>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End WP 3 Winter -->
+
+<?php $l++;
 } ?>
