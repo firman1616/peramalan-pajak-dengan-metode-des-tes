@@ -184,11 +184,11 @@
                         }
                         ?></td>
                     <td><?php echo $a . ', ' . $b . ', ' . $c; ?></td>
-                    <td><?php echo $u->st_winter; ?></td>
-                    <td><?php echo $u->bt_winter; ?></td>
-                    <td><?php echo $u->lt_winter; ?></td>
-                    <td><?php echo $u->ftm_winter; ?></td>
-                    <td><?php echo $u->rmse_winter; ?></td>
+                    <td><?php echo number_format($u->st_winter); ?></td>
+                    <td><?php echo number_format($u->bt_winter); ?></td>
+                    <td><?php echo number_format($u->lt_winter); ?></td>
+                    <td><?php echo number_format($u->ftm_winter); ?></td>
+                    <td><?php echo number_format($u->rmse_winter); ?></td>
                     <td>
                       <center>
                         <a class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" href="<?php echo base_url('Admin/peramalan_winter/hapus/') . $u->id_peramalan_winter ?>"><i class="fas fa-trash fa-sm text-white-50"></i> Hapus</a>
