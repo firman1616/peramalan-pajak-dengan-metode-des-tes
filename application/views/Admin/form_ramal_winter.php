@@ -176,7 +176,7 @@
                         if ($dt1 > 0) {
                           $dt = $this->db->query("SELECT SUM(jumlah_pendapatan) as jumlah FROM tbl_pendapatan WHERE DATE_FORMAT(tgl_pendapatan,'%Y-%m') = '$tglb'")->result();
                           foreach ($dt as $dtk) {
-                            echo $dtk->jumlah;
+                            echo number_format($dtk->jumlah);
                             # code...
                           }
                         } else {
