@@ -113,7 +113,7 @@ class Home extends CI_Controller
                     name: 'Peramalan Brown',
                     data: [
                         <?php for ($a = 0; $a < count($bln); $a++) { ?>
-                            <?php echo $pr[$a]; ?>,
+                            <?php echo  $pr[$a]; ?>,
                         <?php } ?>
                     ]
 
