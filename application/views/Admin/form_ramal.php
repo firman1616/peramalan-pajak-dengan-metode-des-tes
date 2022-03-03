@@ -1,6 +1,3 @@
-<?php
-
-?>
 <div class="container-fluid">
   <div id="notifications"><?php echo $this->session->flashdata('msg'); ?></div>
   <!-- Page Heading -->
@@ -14,20 +11,6 @@
         <div class="card-body">
 
           <form class="user" action="<?php echo base_url('admin/peramalan/perhitungan') ?>" method="post">
-            <!-- <div class="form-group row">
-                  <div class="col-md-4">
-                    Nama Barang :
-                  </div>
-                  <div class="col-md-8">
-                    <select class="form-control" name="kode_barang" id="kd">
-                      <option>Pilih Kode Barang ...</option>
-                    <?php
-                    foreach ($user as $u) { ?>
-                          <option value='<?php echo $u->kode_barang; ?>'><?php echo $u->kode_barang . '/' . $u->nama_barang; ?></option>
-                      <?php } ?>
-                    </select>
-                  </div>
-                </div> -->
             <div class="form-group row">
               <div class="col-md-4">
                 Periode :
@@ -116,7 +99,7 @@
                   <th>No</th>
                   <th>Periode</th>
                   <th>Alpha</th>
-                  <th>Data Aktual</th>
+                  <!-- <th>Data Aktual</th> -->
                   <th>S <sup>'</sup><sub>t</sub></th>
                   <th>S <sup>''</sup><sub>t</sub></th>
                   <th>a <sub>t</sub></th>
@@ -131,24 +114,25 @@
                 $x = 1;
                 foreach ($user2 as $u) {
                   /*echo '<br>'.*/
-                  $tglb = date("Y-m", strtotime($u->tgl_peramalan));
+                  // $tglb = date("Y-m", strtotime($u->tgl_peramalan));
+                  $tglb = date('Y-m', strtotime("-1 months", strtotime($u->tgl_peramalan)));
                 ?>
                   <tr>
                     <td><?php echo $x; ?>.</td>
                     <td><?php echo date("Y/m", strtotime($u->tgl_peramalan)); ?></td>
                     <td><?php echo $u->alpha; ?></td>
-                    <td><?php
-                        $dt1 = $this->db->query("SELECT SUM(jumlah_pendapatan) as jumlah FROM tbl_pendapatan WHERE DATE_FORMAT(tgl_pendapatan,'%Y-%m') = '$tglb'")->num_rows();
-                        if ($dt1 > 0) {
-                          $dt = $this->db->query("SELECT SUM(jumlah_pendapatan) as jumlah FROM tbl_pendapatan WHERE DATE_FORMAT(tgl_pendapatan,'%Y-%m') = '$tglb'")->result();
-                          foreach ($dt as $dtk) {
-                            echo number_format($dtk->jumlah);
-                            # code...
-                          }
-                        } else {
-                          echo '0';
-                        }
-                        ?></td>
+                    <!-- <td><?php
+                              // $dt1 = $this->db->query("SELECT SUM(jumlah_pendapatan) as jumlah FROM tbl_pendapatan WHERE DATE_FORMAT(tgl_pendapatan,'%Y-%m') = '$tglb'")->num_rows();
+                              // if ($dt1 > 0) {
+                              //   $dt = $this->db->query("SELECT SUM(jumlah_pendapatan) as jumlah FROM tbl_pendapatan WHERE DATE_FORMAT(tgl_pendapatan,'%Y-%m') = '$tglb'")->result();
+                              //   foreach ($dt as $dtk) {
+                              //     echo number_format($dtk->jumlah);
+                              //     # code...
+                              //   }
+                              // } else {
+                              //   echo '0';
+                              // }
+                              ?></td> -->
                     <td><?php echo number_format($u->step1); ?></td>
                     <td><?php echo number_format($u->step2); ?></td>
                     <td><?php echo number_format($u->step3); ?></td>

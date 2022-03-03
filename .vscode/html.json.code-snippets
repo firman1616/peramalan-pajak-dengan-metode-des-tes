@@ -1,0 +1,10 @@
+{
+	"PHP Tag" : {
+		"prefix": "php", //apa yang di ketik
+		"body": "<?php $l ?>" //kalok di tab mau jadi apa
+	},
+	"Inline Echo":{
+		"prefix": "phpp",
+		"body": "<?= $$l; ?>"
+	}
+}

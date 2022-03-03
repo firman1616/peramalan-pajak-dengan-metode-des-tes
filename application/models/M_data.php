@@ -72,4 +72,19 @@ class M_data extends CI_model
 	{
 		return $this->db->query("SELECT * FROM `tbl_peramalan_winter` WHERE MONTH(tgl_peramalan_winter) = '$bulan' AND YEAR(tgl_peramalan_winter) = '$year'");
 	}
+
+	public function ambil_data_brown($bulan, $tahun)
+	{
+		return $this->db->query("SELECT
+			tgl_pendapatan,
+			SUM( jumlah_pendapatan ) AS total 
+		FROM
+			tbl_pendapatan 
+		WHERE
+			tgl_pendapatan BETWEEN '$tahun-$bulan-01' 
+			AND '$tahun-$bulan-31' 
+		GROUP BY
+			MONTH (
+			tgl_pendapatan)");
+	}
 }

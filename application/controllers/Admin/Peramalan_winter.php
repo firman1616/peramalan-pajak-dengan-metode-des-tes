@@ -47,6 +47,7 @@ class Peramalan_winter extends CI_Controller
 		echo '<br>Bln 2 = ' . $blnplus1 = date('m', strtotime("+1 month", strtotime($bln2)));
 		echo '<br>Bln 3 = ' . $blnplus2 = date('m', strtotime("+2 month", strtotime($bln2)));
 		/*echo '<br>'.*/
+
 		$thn = $this->input->post('thn');
 		/*echo '<br>'.*/
 		$alp = $this->input->post('alpha');
@@ -127,7 +128,11 @@ class Peramalan_winter extends CI_Controller
 				);
 			} else {
 				echo '<br>tidak ada';
-				$sqldtpn1 = $this->db->query("SELECT SUM(jumlah_pendapatan) as total FROM tbl_pendapatan WHERE DATE_FORMAT(tgl_pendapatan, '%Y') = '$thn' AND MONTH(tgl_pendapatan) BETWEEN '$bln' AND '$blnplus2'")->row();
+				// $sqldtpn1 = $this->db->query("SELECT SUM(jumlah_pendapatan) as total FROM tbl_pendapatan WHERE DATE_FORMAT(tgl_pendapatan, '%Y') = '$thn' AND MONTH(tgl_pendapatan) BETWEEN '$bln' AND '$blnplus2'")->row();
+
+				// My Query Section
+				$sqldtpn1 = $this->db->query("SELECT tgl_pendapatan, SUM(jumlah_pendapatan) as total FROM tbl_pendapatan WHERE DATE_FORMAT(tgl_pendapatan, '%Y') = '$thn' AND MONTH(tgl_pendapatan) BETWEEN '$bln' AND '$blnplus2'")->row();
+				// End My Query Section
 
 				// die("SELECT SUM(jumlah_pendapatan) as total FROM tbl_pendapatan WHERE DATE_FORMAT(tgl_pendapatan, '%Y') = '$thn' AND MONTH(tgl_pendapatan) BETWEEN '$bln' AND '$blnplus2'");
 
@@ -138,7 +143,7 @@ class Peramalan_winter extends CI_Controller
 
 				echo '<br>sl = ' . $sl = $Ft1 / $cpnd;
 				echo '<br>bl = ' . $bl = $sl / $cpnd;
-				echo '<br>il = ' . $ll = $Ft11 / $sl; //variable nganggur
+				echo '<br>il = ' . $il = $Ft11 / $sl;
 
 				for ($a = 0; $a < 3; $a++) {
 					echo '<br>Bulan' . $bln;
@@ -147,11 +152,11 @@ class Peramalan_winter extends CI_Controller
 
 					echo '<br>gtw = ' . $gtw = $pndbln / $sl;
 					// echo '<br>' . $st = $alp * ($pndbln / $gtw) + $alpmin * ($sl + $bl);
-					echo '<br>st = ' . $st = $alp * ($pndbln / $ll) + $alpmin * ($sl + $bl);
+					echo '<br>st = ' . $st = $alp * ($pndbln / $il) + $alpmin * ($sl + $bl);
 					echo '<br>bt = ' . $bt = $beta * ($sl - $st) + ($betamin * $bl);
-					echo '<br>lt = ' . $lt = $gamma * ($pndbln / $sl) + ($gammamin * $ll);
+					echo '<br>lt = ' . $lt = $gamma * ($pndbln / $sl) + ($gammamin * $il);
 					echo '<br>ftm = ' . $ftm = ($st + $bt) * $lt;
-					echo '<br>rmse2 = ' . $rmse = sqrt(pow(($pndbln - $ftm), 2)) / 3;
+					echo '<br>rmse2 = ' . $rmse = sqrt(pow(($pndbln - $ftm), 2)) / 12;
 					// echo '<br>var = ' . $a = $pndbln - $ftm;
 					// echo '<br>pangkat = ' . $pangkat = pow($a, 2);
 					// echo '<br>rmse = ' . $rmse = sqrt($pangkat) / 3;
@@ -164,6 +169,7 @@ class Peramalan_winter extends CI_Controller
 					} else {
 						$blnn = $bln;
 					}
+
 
 					$data = array(
 						'id_peramalan_winter' => '',
@@ -179,9 +185,11 @@ class Peramalan_winter extends CI_Controller
 						'ftm_winter' => $ftm,
 						'rmse_winter' => $rmse
 					);
-					$this->m_data->input_data($data, 'tbl_peramalan_winter');
+
+					// $this->m_data->input_data($data, 'tbl_peramalan_winter');
 					$bln++;
 				}
+				die(var_dump($data));
 
 
 

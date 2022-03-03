@@ -78,10 +78,15 @@
           <span>Peramalan Brown</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('admin/peramalan_winter') ?>">
+        <a class="nav-link" href="<?php echo base_url('admin/peramalan_winter2') ?>">
           <i class="fas fa-fw fa-table"></i>
           <span>Peramalan - Holt Winter</span></a>
       </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url('admin/peramalan_winter') ?>">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Peramalan - Holt Winter</span></a>
+      </li> -->
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <!-- <li class="nav-item">

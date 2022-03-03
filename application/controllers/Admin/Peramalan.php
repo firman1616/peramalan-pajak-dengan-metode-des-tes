@@ -127,17 +127,24 @@ class Peramalan extends CI_Controller
 
 			$alpmin = 1 - $alp;
 
-			// $st1 = ($alp * $Ft) + ($alpmin * $prmin1);
-			echo '<br>S1 = ' . $st1 = ($alp * $Ft) + ($alpmin * $bln_sblm);
-			// $st2 = ($alp * $st1) + ($alpmin * $prmin12);
-			echo '<br>S2 = ' . $st2 = ($alp * $st1) + ($alpmin * $bln_sblm);
+			// $st1 = ($alp * $Ft) + ($alpmin * $prmin1); $st1 = ($alp * $Ft) + ($alpmin * $bln_sblm);
+			echo '<br>Data Aktual = ' . $bln_sblm;
+			echo '<br>S1 = ' . $st1 = ($alp * $Ft) + ($alpmin * $prmin1);
+			//  $st2 = ($alp * $st1) + ($alpmin * $bln_sblm);
+			echo '<br>S2 = ' . $st2 = ($alp * $st1) + ($alpmin * $prmin12);
 			echo '<br>At = ' . $st3 = (2 * $st1) - $st2;
 			echo '<br>Bt = ' . $st4 = ($alp / $alpmin) * ($st1 - $st2);
 			echo '<br>Ft+m = ' . $st5 = $st3 + $st4;
 			// $rmse = sqrt((pow(($Ft - $st5), 2) / 1));
-			echo '<br>rmse = ' . $rmse = sqrt(pow(($Ft - $st5), 2)) / 1;
+			echo '<br>rmse = ' . $rmse = sqrt(pow(($bln_sblm - $st5), 2)) / 12;
+			$x = $Ft - $st5;
+			$y = $x / $Ft;
+			$z = $y * 100;
+			$q = $z / 12;
+			echo '<br> MAPE = ' . $q;
 			echo '<br>';
 			echo '<br>';
+			// die(var_dump($q));
 
 			$data = array(
 				'id_peramalan' => '',
@@ -207,4 +214,31 @@ class Peramalan extends CI_Controller
 		);
 		redirect('Admin/Peramalan/index');
 	}
+
+	public function form_ramal2()
+	{
+		$data['title'] = 'DES Brown';
+		$data['navigation'] = 'navigation/nav';
+		$data['content'] = 'admin/form_ramal2';
+		$this->load->view('template/content', $data);
+	}
+
+	// public function hitung()
+	// {
+	// 	$bln = $this->input->post('bln');
+	// 	$thn = $this->input->post('thn');
+	// 	$alp = $this->input->post('alpha');
+
+	// 	if ($bln < 10) {
+	// 		$bln2 = '01-' . '0' . $bln . '-' . $thn;
+	// 	} else {
+	// 		$bln2 = '01-' . $bln . '-' . $thn;
+	// 	}
+	// 	echo '<br>Bulan Yang Diambil = ' . $bln;
+	// 	echo '<br>Bln 2 = ' . $blnplus1 = date('m', strtotime("+1 month", strtotime($bln)));
+	// 	echo '<br>Bln 3 = ' . $blnplus2 = date('m', strtotime("+2 month", strtotime($bln)));
+	// 	die(var_dump($blnplus2));
+
+	// 	$d_aktual = $this->db->query("SELECT tgl_pendapatan, SUM(jumlah_pendapatan) as total FROM tbl_pendapatan WHERE YEAR(tgl_pendapatan) = '$thn' AND MONTH(tgl_pendapatan) BETWEEN '01' AND '05' GROUP BY MONTH(tgl_pendapatan)")->row();
+	// }
 }

@@ -6,7 +6,7 @@
 			$this->load->model('model_login');
 		} 
 
-		function login (){
+		function login_form (){
 			 	// proses login disini
 			 	$username = $this->input->post('username');
 			 	$password = $this->input->post('password');
@@ -40,4 +40,3 @@
 			redirect('Login');
 		}
 	}
-?>
